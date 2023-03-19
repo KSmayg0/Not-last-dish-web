@@ -1,0 +1,260 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background: rgb(255,200,58);
+background: linear-gradient(0deg, rgba(255,200,58,1) 0%, rgba(255,118,114,1) 100%);
+background-attachment: fixed;
+display: flex;
+justify-content:center;
+align-items:center;
+flex-direction: column;
+}
+a {
+  text-decoration: none;
+}
+.signin {
+  margin-top: 20px;
+}
+.signin-btn {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  bottom: 0px;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+color: #000;
+width: 180px;
+height: 49px;
+border: none;
+
+background: #FFFFFF;
+box-shadow: 0px 4.66667px 4.66667px rgba(0, 0, 0, 0.25);
+border-radius: 23px;
+  transition: all 0.2s ease;
+}
+.signin-btn:hover {
+  background: #FFD6D5;
+}
+.suptitle {
+  font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 20px;
+margin: 7px 0px 10px 0px;
+}
+.registr-title {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width: 180px;
+height: 49px;
+background: #FFFFFF;
+border-radius: 23px;
+margin-bottom:-25px;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+}
+section {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+}
+.imgup {
+width:100%;
+}
+.imgupblock {
+  margin:-10px 0px;
+  width:420px;
+}
+.imgbotblock {
+  margin-top:-1px;
+  width:436.7px;
+}
+.imgbot {
+  width:100%;
+}
+
+form  {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+    flex-direction: column;
+    width:390px;
+}
+.backgr {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+    flex-direction: column;
+    background: #FFF;
+    padding-top:25px;
+    width:390px;
+}
+
+
+
+.img {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+height: 170px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
+border-radius: 39px;
+margin-bottom:20px;
+}
+#blanh {
+  width: 140px;
+height: 140px;
+border-radius:90px;
+}
+
+input[type='file'] {
+}
+.input-file {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:20px;
+}
+.input-file-btn:active {
+  box-shadow: 0 0 0 0.2rem rgba(255,118,114,1);
+}
+.input-file-btn:hover {
+  background:  #FF7672;
+  color:#FFF;
+  border: none;
+}
+.input-file-btn {
+  cursor:pointer;
+  width: 240px;
+  height: 40px;
+  background: #FFFFFF;
+border: 3px solid rgba(0, 0, 0, 0.3);
+border-radius: 20px;
+display:flex;
+justify-content: center;
+align-items: center;
+transition: all 0.2s ease;
+}
+.right {
+  color: green;
+}
+.checkbox {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.checkbox-first {
+  margin-top: 20px;
+  margin-bottom:10px;
+}
+.checkbox-second {
+margin-bottom: 30px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(0, 0, 0, 0.3);
+    letter-spacing: 0;
+}
+input[type="text"], input[type="mail"], input[type="password"] {
+  color: #000;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    font-size: 14px;
+line-height: 22px;
+  width: 308px !important;
+height: 55px;
+  background: #FFFFFF;
+border: 3px solid rgba(0, 0, 0, 0.3);
+border-radius: 22.2222px;
+padding-left:21px;
+margin-bottom:5px;
+}
+#block-check {
+    height: 5px;
+    margin-top: 5px;
+    transition: 1s;
+}
+
+.block-for-input input {
+    width: 100%;
+}
+
+ul {
+  width:308px;
+  font-size:12px;
+  font-weight:600;
+  text-decoration: none;
+  margin:5px 0px;
+}
+li {
+  margin-bottom: 5px;
+}
+.errorpass {
+  border: 5px solid red;
+}
+label {
+  width: 308px;
+  font-size: 12px;
+  font-weight:600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.message-block {
+  display:block;
+  background: #FFC0CB;
+  border-radius: 10px;
+  padding: 15px 10px;
+  font-size:14px;
+  font-weight: 500;
+color: #BA0000;
+width:284px;
+margin-bottom:5px;
+}
+span {
+  font-weight: 600;
+font-size: 14px;
+margin-right:3px;
+}
+.links {
+  color: #FF7672;
+  font-size:14px;
+  font-weight:600;
+}
+.submit-block {
+  margin-top:-30px;
+  margin-bottom:50px;
+}
+input[type="submit"] {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  bottom: 0px;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+color: #000;
+width: 180px;
+height: 49px;
+border: none;
+
+background: #FFFFFF;
+box-shadow: 0px 4.66667px 4.66667px rgba(0, 0, 0, 0.25);
+border-radius: 23px;
+  transition: all 0.2s ease;
+}
+input[type="submit"]:hover {
+  background: #FFD6D5;
+}

@@ -1,0 +1,223 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background: rgb(255,200,58);
+background: linear-gradient(0deg, rgba(255,200,58,1) 0%, rgba(255,118,114,1) 100%);
+height:100vh;
+}
+.registr-block {
+  width: 100%;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+height:170px;
+}
+.registr-message-block {
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+padding: 10px;
+  background: #9CFF88;
+  border-radius: 10px;
+  width: 330px;
+  height: 50px;
+  margin-bottom:10px;
+}
+.registr-message {
+  font-size:14px;
+  font-weight: 500;
+color: #11772D;
+}
+.section-login {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-block {
+  width:390px;
+  height:350px;
+  background-image: url(Subtract.svg);
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+form {
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+flex-direction: column;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(0, 0, 0, 0.3);
+      letter-spacing: 0;
+}
+#login, #password {
+  color: #000;
+  letter-spacing: 0.3px;
+    font-weight: 600;
+    font-size: 14px;
+line-height: 22px;
+  width: 308px;
+height: 55px;
+  background: #FFFFFF;
+border: 3px solid rgba(0, 0, 0, 0.3);
+border-radius: 22.2222px;
+padding-left:21px;
+margin-bottom: 5px;
+}
+#btn {
+  font-style: normal;
+  bottom: 0px;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+color: #000;
+width: 180px;
+height: 49px;
+border: none;
+
+background: #FFFFFF;
+box-shadow: 0px 4.66667px 4.66667px rgba(0, 0, 0, 0.25);
+border-radius: 23px;
+    transition: all 0.2s ease;
+}
+#btn:hover {
+  background: #FFD6D5;
+}
+.registr {
+    text-decoration: none;
+}
+.section-registr {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.registr-btn {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  bottom: 0px;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+color: #000;
+width: 180px;
+height: 49px;
+border: none;
+
+background: #FFFFFF;
+box-shadow: 0px 4.66667px 4.66667px rgba(0, 0, 0, 0.25);
+border-radius: 23px;
+  transition: all 0.2s ease;
+}
+.registr-btn:hover {
+  background: #FFD6D5;
+}
+.forget-pass-block {
+  width:308px;
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  margin-top: 14px;
+  margin-right: 15px;
+}
+.forget-pass {
+display:flex;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  color: #000;
+  transition: all 0.2s ease;
+}
+.forget-pass:hover {
+  color: #1A73E8;
+}
+.checkbox-block {
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left:10px;
+    width:308px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #000;
+  margin-top:15px;
+  margin-bottom: 25px;
+}
+.button-submit {
+  position:absolute;
+  margin-top: 330px;
+}
+input[type="checkbox"] {
+    appearance:none;
+}
+input[type="checkbox"]:checked:before,
+input[type="checkbox"]:not(:checked):before {
+  display:inline-block;
+  content: "";
+    left: 0px;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    background: #FFFFFF;
+border: 3px solid rgba(0, 0, 0, 0.3);
+border-radius: 5px;
+margin-right:8px;
+}
+input[type="checkbox"]:checked:after,
+input[type="checkbox"]:not(:checked):after, {
+    content: "";
+    background: #DDD;
+    transition: all 0.2s ease;
+}
+input[type="checkbox"]:checked:after,
+input[type="checkbox"]:not(:checked):after {
+    left: 3px;
+    top: 4px;
+    width: 10px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 4px solid #e145a3;
+    border-bottom: 4px solid #e145a3;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.subtitle-block {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom: 20px;
+  margin-top:50px;
+}
+.subtitle {
+  font-weight: 600;
+font-size: 12px;
+color: #000;
+}
+.error-block {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+padding: 15px 10px;
+margin-top:-10px;
+  margin-bottom:10px;
+  background: #FFC0CB;
+  border-radius: 10px;
+}
+.error {
+  font-size:14px;
+  font-weight: 500;
+color: #BA0000;
+}

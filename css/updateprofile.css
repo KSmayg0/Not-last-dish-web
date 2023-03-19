@@ -1,0 +1,116 @@
+.profile-change-block {
+  width:100%;
+  background: #FFF;
+  border-radius: 30px;
+  margin-bottom:40px;
+  padding-bottom:30px;
+}
+main {
+  margin-left:70px;
+  width:70%;
+}
+.form-block {
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
+.submit-block {
+  margin-top:10px;
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-file {
+margin-bottom:10px;
+}
+.img {
+  margin-top:40px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+height: 230px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
+border-radius: 39px;
+margin-bottom:20px;
+}
+#blanh {
+  width: 200px;
+height: 200px;
+border-radius:90px;
+}
+h1 {
+  font-family: 'Nunito';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 33px;
+
+color: #000000;
+width:max-content;
+background: #FFF;
+padding: 7px 21px;
+border-radius: 50px;
+margin-bottom: 15px;
+}
+.message-block {
+  display:block;
+  background: #FFC0CB;
+  border-radius: 10px;
+  padding: 15px 10px;
+  font-size:14px;
+  font-weight: 500;
+color: #BA0000;
+width:284px;
+margin-bottom:5px;
+}
+input[type="submit"] {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  bottom: 0px;
+font-weight: 600;
+font-size: 14px;
+line-height: 23px;
+color: #000;
+width: 180px;
+height: 49px;
+border: none;
+
+background: #FFFFFF;
+box-shadow: 0px 4.66667px 4.66667px rgba(0, 0, 0, 0.25);
+border-radius: 23px;
+  transition: all 0.2s ease;
+}
+input[type="submit"]:hover {
+  background: #FFD6D5;
+}
+.input-change {
+  color: #000;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    font-size: 14px;
+line-height: 22px;
+  width: 308px !important;
+height: 55px;
+  background: #FFFFFF;
+border: 3px solid rgba(0, 0, 0, 0.3);
+border-radius: 22.2222px;
+padding-left:21px;
+margin-bottom:5px;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(0, 0, 0, 0.3);
+    letter-spacing: 0;
+}
+label[for="nickname"], label[for="surname"] {
+  margin-bottom:10px;
+  font-weight:500;
+  font-size:15px;
+}

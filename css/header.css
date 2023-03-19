@@ -1,0 +1,200 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background: rgb(255,200,58);
+background: linear-gradient(0deg, rgba(255,200,58,1) 0%, rgba(255,118,114,1) 100%);
+background-attachment: fixed;
+height:100vh;
+}
+header {
+  position:relative;
+  display:flex;
+  height:105px;
+  align-items: center;
+  margin-bottom: 10px;
+  width:100%;
+}
+
+.logo {
+  width: 114px;
+  height: 27px;
+  margin: 0px 101px 0px 48px;
+}
+.logo-text {
+  font-family: 'Nunito';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 27px;
+
+color: #FFFFFF;
+width:100%;
+height:100%;
+text-decoration: none;
+}
+input[name="search"] {
+  width: 347px;
+height: 44px;
+
+background: #FFFFFF;
+border-radius: 20px 0px 0px 20px;
+border:none;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+color: rgba(0, 0, 0, 0.5);
+padding-left:24px;
+margin-top: 3px;
+}
+.button-search {
+  margin: 0px 0px 0px -3.5px;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+border: none;
+color: #000000;
+  width: 105px;
+height: 44px;
+
+background: #FFFFFF;
+border-left: 2px solid rgba(0, 0, 0, 0.3);
+border-radius: 0px 10px 10px 0px;
+transition: all 0.2s ease;
+}
+.button-search:hover {
+  background: #DDD;
+}
+.menu a {
+  display:flex;
+  align-items: center;
+  text-decoration: none;
+}
+.menu {
+    text-decoration: none;
+  width:190px;
+}
+.menu li {
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left:10px;
+  padding-top: 7px;
+  padding-bottom:7px;
+  margin-bottom:10px;
+  transition: all 0.2s ease;
+}
+.profile {
+  width:120px;
+}
+.favorites {
+  width: 130px;
+}
+.create {
+  width: 165px;
+}
+.settings {
+  width: 130px;
+}
+.tech_support {
+  width: 145px;
+}
+.faq {
+  width:85px;
+}
+.menu li:hover {
+  border-radius: 20px;
+  background:#FFA99D;
+}
+li img {
+  height:20px;
+  width:20px;
+  margin-right: 7px;
+}
+.img-other {
+  height:35px;
+  display:flex;
+  justify-content: flex-start;
+}
+
+.menu a div {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: #FFFFFF;
+}
+.body {
+  display:flex;
+  flex-direction: row;
+}
+/*Режим модератора*/
+.moder {
+  width:200px;
+  height:50px;
+  right:100px;
+  position:absolute;
+  text-decoration: none;
+}
+.moder-button {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+    width:200px;
+    height:50px;
+    color:#000;
+    font-family: 'Nunito';
+    font-weight: 500;
+    font-size: 14px;
+    background: #FFF;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.moder-button:hover {
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 0 10px 4px red;
+}
+.exit-block {
+  width:100%;
+  height: 43px;
+  display:flex;
+  margin-top:110px;
+}
+.exit-block a {
+    background: #FFF;
+    border-radius: 0px 20px 20px 0px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+  text-decoration: none;
+  color:#000;
+  font-family: 'Nunito';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 20px;
+  transition: all 0.2s ease;
+
+}
+.exit-block a:hover {
+background: #FF7672;
+color:#FFF;
+}
+.exit-block a:active {
+  background: #FFA99D;
+  color:#FFF;
+}
