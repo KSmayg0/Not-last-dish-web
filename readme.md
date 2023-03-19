@@ -1,3 +1,3 @@
-# Git check
+# Web version Recipes
 
-Test git
+Some text
