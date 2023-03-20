@@ -4,11 +4,32 @@ include ("config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
-if(isset($_POST['search-ingr-up'])) {
-  $goods=mysqli_query($connect,"SELECT * FROM `Ingredient` WHERE `name`=`{$_POST['search-ingr-up']}`");
-  $goods=mysqli_fetch_all($goods);
+$inputSearch=$_REQUEST['search-ingr-up'];
+
+$sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch'";
+$result=mysqli_query($connect,$sql);
+function doesItExist(array $arr) {
+  //Создаём новый массив
+  $data=array(
+    'name'=> $arr['name'] != false ? $arr['name'] : 'Нет данных'
+  );
+  return $data;//Возвращаем массив
 }
 
+function countPeople($result) {
+  if($result->num_rows>0) {
+    while($row=$result->fetch_assoc()) {
+      $arr=doesItExist($row);
+      //Вывод данных
+      echo "ID:".$row['idIngredient']."<br>
+      <img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+      Название ингредиента: ".$row['name']."<br>
+      Описание ингредиента: ".$row['description']."<br>";
+    }
+  } else {
+    echo "По такому запросу ингредиенты в базе данных не найдены.";
+  }
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,26 +122,18 @@ if(isset($_POST['search-ingr-up'])) {
 
 <button class="btn-list2 update-ingredient" type="button" name="button">Изменить ингредиент</button>
 <h3>Изменение ингредиента</h3>
-<form class="" action="update.php" method="post" enctype="multipart/form-data">
+<form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
   <input type="text" name="search-ingr-up" value="" placeholder="Введите название ингредиента">
   <input type="submit" name="submit-search-ingr-up" value="Найти">
 </form>
 <div class="ingr-list">
-  <?php
-  if(isset($_POST['search-ingr-up'])) {
-  foreach($goods as $item) {
-?>
-<div class="ingr-element">
-  <div class="name-ingr">
-    <?php echo 'Название ингредиента:'.$item[1].''; ?>
-  </div>
-  <div class="name-ingr">
-    <?php echo 'Описание ингредиента:'.$item[3].''; ?>
-  </div>
-</div>
 <?php
-}; };
-  ?>
+if($inputSearch!=NULL) {
+  countPeople($result); //Функция вывода ингредиентов
+} else {
+  echo "Здесь отображается список ингредиентов.";
+}
+ ?>
 </div>
 
 

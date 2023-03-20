@@ -135,3 +135,7 @@ height: 50px;
 margin-left:300px;
 }
 /*Изменение ингредиента*/
+.ingr-search-picture {
+  width:200px;
+  height:200px;
+}
