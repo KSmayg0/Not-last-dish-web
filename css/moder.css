@@ -68,6 +68,7 @@ h3 {
   width:max-content;
   border-radius: 20px;
   padding: 10px 25px;
+  background: #FFF;
 }
 .btn-list img {
   margin-left:20px;
@@ -134,8 +135,55 @@ width: 330px;
 height: 50px;
 margin-left:300px;
 }
+.subtitle-img {
+  font-size:15px;
+  font-weight:500;
+  width:500px;
+  margin: 5px 0px;
+  display:flex;
+  text-align: center;
+}
 /*Изменение ингредиента*/
 .ingr-search-picture {
-  width:200px;
+  width:100%;
   height:200px;
+  object-fit:cover;
+  border-radius: 20px 20px 0px 0px;
+}
+.ingr-list {
+  display:flex;
+  width:100%;
+}
+.ingredient-block {
+  display:flex;
+  width:350px;
+  flex-direction: column;
+  background: #FFF;
+  margin:10px 0px;
+  border-radius:20px;
+}
+.ingredient-name {
+  padding: 0px 20px 0px 20px;
+    margin:20px 0px;
+  font-family: 'Nunito';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 15px;
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+.ingredient-description {
+  padding: 0px 20px 20px 20px;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 15px;
+display: flex;
+align-items: center;
+
+color: #000000;
 }

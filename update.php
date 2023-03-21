@@ -4,10 +4,25 @@ include ("config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
-$inputSearch=$_REQUEST['search-ingr-up'];
+if(isset($_REQUEST['search-ingr-up'])) {
+  $inputSearch=$_REQUEST['search-ingr-up'];
+  if($inputSearch!=NULL) {
+    if((strlen($inputSearch)/2)==1) {
+      $symbol1=mb_substr($inputSearch,0);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch' OR (`name` LIKE '{$symbol1}%')";
+        $result=mysqli_query($connect,$sql);
+    } else {
+      $symbol3=mb_substr($inputSearch,0,3);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch' OR (`name` LIKE '%{$symbol3}%')";
+        $result=mysqli_query($connect,$sql);
+    }
 
-$sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch'";
-$result=mysqli_query($connect,$sql);
+  } else {
+    $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch'";
+    $result=mysqli_query($connect,$sql);
+  }
+}
+
 function doesItExist(array $arr) {
   //Создаём новый массив
   $data=array(
@@ -21,10 +36,9 @@ function countPeople($result) {
     while($row=$result->fetch_assoc()) {
       $arr=doesItExist($row);
       //Вывод данных
-      echo "ID:".$row['idIngredient']."<br>
-      <img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
-      Название ингредиента: ".$row['name']."<br>
-      Описание ингредиента: ".$row['description']."<br>";
+      echo "<div class='ingredient-block'><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+    <div class='ingredient-name'>".$row['name']."</div>
+      <div class='ingredient-description'>".$row['description']."</div></div>";
     }
   } else {
     echo "По такому запросу ингредиенты в базе данных не найдены.";
@@ -104,7 +118,9 @@ function countPeople($result) {
   <label for="imgInp" class="input-file">
   <input accept="image/*" type="file" name="file" id="imgInp" >
   </label>
-
+<div class="subtitle-img">
+  Внимание! Добавляйте изображение с соответствующим названием ингредиента. Например: Банан - banan.
+</div>
   <label for="title">Название ингредиента (не более 45 знаков). Это поле не может быть пустым.</label>
   <?php if (isset($_SESSION['ingraddtitle'])) { ?>
 <div class="message-block"> <?php echo $_SESSION['ingraddtitle']; unset($_SESSION['ingraddtitle']); ?></div>
@@ -121,14 +137,13 @@ function countPeople($result) {
 <!--Изменить ингредиент-->
 
 <button class="btn-list2 update-ingredient" type="button" name="button">Изменить ингредиент</button>
-<h3>Изменение ингредиента</h3>
 <form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
   <input type="text" name="search-ingr-up" value="" placeholder="Введите название ингредиента">
   <input type="submit" name="submit-search-ingr-up" value="Найти">
 </form>
 <div class="ingr-list">
 <?php
-if($inputSearch!=NULL) {
+if(isset($inputSearch)) {
   countPeople($result); //Функция вывода ингредиентов
 } else {
   echo "Здесь отображается список ингредиентов.";
@@ -136,9 +151,8 @@ if($inputSearch!=NULL) {
  ?>
 </div>
 
-
 <form class="up-ingr-form" action="ingrup.php" method="post">
-
+<h3>Изменение ингредиента</h3>
 </form>
 </div>
 
