@@ -38,7 +38,7 @@ if(isset($_GET['error'])) {
   <div class="error"> <?php echo $_GET['error'];?></div> </div>
 <?php }; ?>
 
-        <input type="text" id="login" name="login" placeholder="Логин / Электронная почта">
+        <input type="text" id="login" name="login" placeholder="Логин">
         <input type="password" id="password" name="password" placeholder="Пароль">
         <div class="forget-pass-block"><a class="forget-pass" href="#">Забыли пароль?</a></div>
         <div class="checkbox-block"> <input type="checkbox" name="remember" value=""> <span>Запомнить меня</span>  </div>

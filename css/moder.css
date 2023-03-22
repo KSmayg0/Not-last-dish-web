@@ -153,6 +153,7 @@ margin-left:300px;
 .ingr-list {
   display:flex;
   width:100%;
+  flex-direction: column;
 }
 .ingredient-block {
   display:flex;
@@ -161,6 +162,16 @@ margin-left:300px;
   background: #FFF;
   margin:10px 0px;
   border-radius:20px;
+  position:relative;
+}
+.link-update {
+  position:absolute;
+  right:0;
+  margin: 10px 10px 0px 0px;
+}
+.link-update img {
+  height:30px;
+  width:30px;
 }
 .ingredient-name {
   padding: 0px 20px 0px 20px;
@@ -189,4 +200,16 @@ color: #000000;
 }
 .up-ingr-form {
   background: #FFF;
+}
+.ingredient-list {
+  display:flex;
+}
+.ingredient-block:not(:first-child) {
+  margin-left:20px;
+}
+.show {
+  display:block;
+}
+.hide {
+  display:none;
 }
