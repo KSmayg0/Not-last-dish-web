@@ -1,4 +1,5 @@
 <?php
+//Добавление ингредиента в режиме модератора
 session_start();
 include ("config/connect.php");
 function validate($data) {

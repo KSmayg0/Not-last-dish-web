@@ -1,4 +1,5 @@
 <?php
+//Изменение профиля со стороны пользователя
 session_start();
 include ("config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";

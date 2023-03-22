@@ -36,7 +36,7 @@ function countPeople($result) {
     while($row=$result->fetch_assoc()) {
       $arr=doesItExist($row);
       //Вывод данных
-      echo "<div class='ingredient-block'><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+      echo "<div class='ingredient-block'><a href='update.php?id=".$row['idIngredient']."'>Обновить</a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
     <div class='ingredient-name'>".$row['name']."</div>
       <div class='ingredient-description'>".$row['description']."</div></div>";
     }
@@ -150,9 +150,40 @@ if(isset($inputSearch)) {
 }
  ?>
 </div>
-
 <form class="up-ingr-form" action="ingrup.php" method="post">
+  <?php
+  if(isset($_GET['id'])) {
+    $_SESSION['idIngredient']=$_GET['id'];
+   $updateIngredient=$_GET['id'];
+   $sql="SELECT * FROM `Ingredient` WHERE `idIngredient`={$updateIngredient}";
+   $result=mysqli_query($connect,$sql);
+   $Ingredient=mysqli_fetch_assoc($result);
+ } else {
+   unset($_SESSION['idIngredient']);
+ }
+  ?>
 <h3>Изменение ингредиента</h3>
+<div class="img">
+  <img id="blanh1" src="ingredients/<?php if(isset($_GET['id'])) echo"{$Ingredient['picture']}"; ?>">
+</div>
+<label for="imgInp" class="input-file">
+<input accept="image/*" type="file" name="file" id="imgInp1" >
+</label>
+
+<?php if (isset($_SESSION['upingrname'])) { ?>
+<div class="message-block"> <?php echo $_SESSION['upingrname']; unset($_SESSION['upingrname']); ?></div>
+<?php  }; ?>
+
+<p>Название ингредиента: </p>
+<input type="text" name="name" value="<?php if(isset($_GET['id'])) echo"{$Ingredient['name']}"; ?>">
+
+<?php if (isset($_SESSION['upingrdescription'])) { ?>
+<div class="message-block"> <?php echo $_SESSION['upingrdescription']; unset($_SESSION['upingrdescription']); ?></div>
+<?php  }; ?>
+
+<p>Описание ингредиента: </p>
+<input type="text" name="description" value="<?php if(isset($_GET['id'])) echo"{$Ingredient['description']}"; ?>">
+<input type="submit" name="submit" value="Обновить">
 </form>
 </div>
 
@@ -178,6 +209,12 @@ if(isset($inputSearch)) {
     const [file] = imgInp.files
     if (file) {
       blanh.src=URL.createObjectURL(file);
+    }
+  };
+  imgInp1.onchange = evt => {
+    const [file] = imgInp1.files
+    if (file) {
+      blanh1.src=URL.createObjectURL(file);
     }
   };
   </script>'
