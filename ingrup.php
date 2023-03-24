@@ -51,7 +51,6 @@ if($_SESSION['ingrup1']==true && $_SESSION['ingrup2']==true) {
   $_SESSION['ok']='Игредиент успешно изменён';
   header('Location: update.php');
 } else {
-    $_SESSION['ok']='Что-то пошло не так';
-//unset($_SESSION['ok']);
+unset($_SESSION['ok']);
 }
  ?>

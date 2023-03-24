@@ -38,7 +38,7 @@ input[name="title"], textarea[name="description"] {
   border-radius:10px;
   padding: 10px;
 }
-input[name="submit-ingradd"] {
+input[name="submit-ingradd"],input[name="submit-ingrup"],input[name="submit-ingrdel"] {
   margin:10px 0px;
   display:flex;
   justify-content: center;
@@ -59,6 +59,12 @@ border-radius: 23px;
   transition: all 0.2s ease;
 }
 input[name="submit-ingradd"]:hover {
+  background: #FFD6D5;
+}
+input[name="submit-ingrup"]:hover {
+  background: #FFD6D5;
+}
+input[name="submit-ingrdel"]:hover {
   background: #FFD6D5;
 }
 h3 {
@@ -93,7 +99,7 @@ height:70%;
 .btn-list:hover {
   background: #DDD;
 }
-.add-ingr-form {
+.add-ingr-form, .up-ingr-form, .del-ingr-form {
   display:flex;
   justify-content: center;
   align-items: center;
@@ -157,7 +163,7 @@ margin-left:300px;
 }
 .ingredient-block {
   display:flex;
-  width:350px;
+  width:332px;
   flex-direction: column;
   background: #FFF;
   margin:10px 0px;
@@ -198,9 +204,7 @@ align-items: center;
 
 color: #000000;
 }
-.up-ingr-form {
-  background: #FFF;
-}
+
 .ingredient-list {
   display:flex;
 }
@@ -208,8 +212,13 @@ color: #000000;
   margin-left:20px;
 }
 .show {
-  display:block;
+  display:flex;
 }
 .hide {
   display:none;
+}
+/*Удаление ингредиента*/
+
+.del-ingr-form input[type="text"], .del-ingr-form textarea {
+  pointer-events:none;
 }

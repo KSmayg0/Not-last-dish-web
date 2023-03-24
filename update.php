@@ -4,6 +4,7 @@ include ("config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
+
 if(isset($_REQUEST['search-ingr-up'])) {
   $inputSearch=$_REQUEST['search-ingr-up'];
   if($inputSearch!=NULL) {
@@ -41,6 +42,50 @@ function countPeople($result) {
         echo "<div class='ingredient-list'>";
       }
       echo "<div class='ingredient-block'><a class='link-update' href='update.php?id=".$row['idIngredient']."'><img src='css/update.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+     <div class='ingredient-name'>".$row['name']."</div>
+       <div class='ingredient-description'>".$row['description']."</div></div>";
+       if($kol % 3==2) {
+         echo "</div>";
+       }
+       $kol++;
+    }
+    if($kol % 3 !=0) {
+      echo "</div>";
+    }
+  } else {
+    echo "По такому запросу ингредиенты в базе данных не найдены.";
+  }
+}
+
+if(isset($_REQUEST['search-ingr-del'])) {
+  $inputSearch1=$_REQUEST['search-ingr-del'];
+  if($inputSearch1!=NULL) {
+    if((strlen($inputSearch1)/2)==1) {
+      $symbol1=mb_substr($inputSearch1,0);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch1' OR (`name` LIKE '{$symbol1}%') ORDER BY `name` ASC";
+        $result=mysqli_query($connect,$sql);
+    } else {
+      $symbol3=mb_substr($inputSearch1,0,3);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch1' OR (`name` LIKE '%{$symbol3}%')";
+        $result=mysqli_query($connect,$sql);
+    }
+
+  } else {
+    $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch1'";
+    $result=mysqli_query($connect,$sql);
+  }
+}
+
+function countPeople1($result) {
+    $kol=0;
+  if($result->num_rows>0) {
+    while($row=$result->fetch_assoc()) {
+      $arr=doesItExist($row);
+      //Вывод данных
+      if($kol % 3==0) {
+        echo "<div class='ingredient-list'>";
+      }
+      echo "<div class='ingredient-block'><a class='link-update' href='update.php?idd=".$row['idIngredient']."'><img src='css/trash.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
      <div class='ingredient-name'>".$row['name']."</div>
        <div class='ingredient-description'>".$row['description']."</div></div>";
        if($kol % 3==2) {
@@ -108,13 +153,15 @@ function countPeople($result) {
     </div>
 
 <div class="list-block">
+
   <!-- Вывод группы элементов ингредиентов -->
+
 <button class="btn-list btn-ingredients" type="button" name="button">Добавить / Изменить / Удалить ингредиенты<img class="row-in" src="css/arrow_next.png" alt=""></button>
 
 <div class="ingredients-block" id="ingredients-block">
     <input type="text" name="" value="" placeholder="Поиск по базе ингредиентов"> <button type="button" name="button">Найти</button>
 
-    <!-- Добавить ингредиент -->
+  <!-- Добавить ингредиент -->
 
     <button class="btn-list2 add-ingredient" type="button" name="button">Добавить ингредиент</button>
 <form class="add-ingr-form" action="ingradd.php" method="post" enctype="multipart/form-data">
@@ -194,10 +241,55 @@ if(isset($inputSearch)) {
 <?php  }; ?>
 
 <p>Описание ингредиента: </p>
-<input type="text" name="description" value="<?php if(isset($_GET['id'])) {echo $Ingredient['description'];} ?>">
-<input type="submit" name="submit" value="Обновить">
+<textarea class="description-ingr" type="text" name="description" value=""><?php if(isset($_GET['id'])) {echo $Ingredient['description'];} ?></textarea>
+<input type="submit" name="submit-ingrup" value="Обновить">
 </form>
+
+<!-- Удаление ингредиента -->
+
+<button class="btn-list2 delete-ingredient" type="button" name="button">Удалить ингредиент</button>
+<form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
+  <input type="text" name="search-ingr-del" value="" placeholder="Введите название ингредиента">
+  <input type="submit" name="submit-search-ingr-del" value="Найти">
+</form>
+<div class="ingr-list">
+<?php
+if(isset($inputSearch1)) {
+  countPeople1($result); //Функция вывода ингредиентов
+} else {
+  echo "Здесь отображается список ингредиентов.";
+}
+ ?>
 </div>
+  <form class="del-ingr-form <?php if(isset($_GET['idd'])) {echo "show";} else {echo "hide";} ?>" action="ingrdel.php" method="post" enctype="multipart/form-data">
+    <?php
+    if(isset($_GET['idd'])||isset($_SESSION['idIngredient'])) {
+      if(isset($_GET['idd']) && $_GET['idd']!=NULL) {
+        $_SESSION['idIngredient']=$_GET['idd'];
+   $deleteIngredient=$_SESSION['idIngredient'];
+   $sql="SELECT * FROM `Ingredient` WHERE `idIngredient`='{$deleteIngredient}'";
+   $result=mysqli_query($connect,$sql);
+   $Ingredient=mysqli_fetch_assoc($result);
+      }
+
+   }
+    ?>
+  <h3>Удаление ингредиента</h3>
+  <div class="img">
+    <img src="ingredients/<?php if(isset($_GET['idd'])) {echo $Ingredient['picture'];} ?>">
+  </div>
+
+  <p>Название ингредиента: </p>
+  <input type="text" name="name" value="<?php if(isset($_GET['idd'])) { echo $Ingredient['name'];} ?>">
+
+  <p>Описание ингредиента: </p>
+  <textarea class="description-ingr" type="text" name="description" value=""><?php if(isset($_GET['idd'])) {echo $Ingredient['description'];} ?></textarea>
+  <input type="submit" name="submit-ingrdel" value="Удалить">
+  </form>
+
+</div> <!-- .ingredient-block -->
+
+<!-- Блок добавления, изменения, удаления группы категорий-->
 
 <button class="btn-list btn-categories" type="button" name="button">Добавить / Изменить / Удалить группу категорий<img class="row-ct" src="css/arrow_next.png" alt=""></button>
 <div class="categories-block">
@@ -213,7 +305,7 @@ if(isset($inputSearch)) {
   </form>
 </div>
 
-</div>
+</div><!-- .list-block -->
   </main>
   <?php
   echo '<script type="text/javascript">
@@ -227,6 +319,12 @@ if(isset($inputSearch)) {
     const [file] = imgInp1.files
     if (file) {
       blanh1.src=URL.createObjectURL(file);
+    }
+  };
+  imgInp2.onchange = evt => {
+    const [file] = imgInp1.files
+    if (file) {
+      blanh2.src=URL.createObjectURL(file);
     }
   };
   </script>'
