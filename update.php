@@ -41,7 +41,7 @@ function countPeople($result) {
       if($kol % 3==0) {
         echo "<div class='ingredient-list'>";
       }
-      echo "<div class='ingredient-block'><a class='link-update' href='update.php?id=".$row['idIngredient']."'><img src='css/update.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+      echo "<div class='ingredient-block'><a class='link-update' href='update.php?id=".$row['idIngredient']."#srup'><img src='css/update.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
      <div class='ingredient-name'>".$row['name']."</div>
        <div class='ingredient-description'>".$row['description']."</div></div>";
        if($kol % 3==2) {
@@ -53,7 +53,7 @@ function countPeople($result) {
       echo "</div>";
     }
   } else {
-    echo "По такому запросу ингредиенты в базе данных не найдены.";
+  echo "<div class='search-text'>По такому запросу ингредиенты в базе данных не найдены.</div>";
   }
 }
 
@@ -85,7 +85,7 @@ function countPeople1($result) {
       if($kol % 3==0) {
         echo "<div class='ingredient-list'>";
       }
-      echo "<div class='ingredient-block'><a class='link-update' href='update.php?idd=".$row['idIngredient']."'><img src='css/trash.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+      echo "<div class='ingredient-block'><a class='link-update' href='update.php?idd=".$row['idIngredient']."#srdel'><img src='css/trash.png'></a><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
      <div class='ingredient-name'>".$row['name']."</div>
        <div class='ingredient-description'>".$row['description']."</div></div>";
        if($kol % 3==2) {
@@ -97,7 +97,7 @@ function countPeople1($result) {
       echo "</div>";
     }
   } else {
-    echo "По такому запросу ингредиенты в базе данных не найдены.";
+    echo "<div class='search-text'>По такому запросу ингредиенты в базе данных не найдены.</div>";
   }
 }
  ?>
@@ -158,12 +158,10 @@ function countPeople1($result) {
 
 <button class="btn-list btn-ingredients" type="button" name="button">Добавить / Изменить / Удалить ингредиенты<img class="row-in" src="css/arrow_next.png" alt=""></button>
 
-<div class="ingredients-block" id="ingredients-block">
-    <input type="text" name="" value="" placeholder="Поиск по базе ингредиентов"> <button type="button" name="button">Найти</button>
+<div class="ingredients-block <?php if(isset($_GET['search-ingr-up'])||(isset($_GET['id']))||(isset($_GET['idd']))||(isset($_GET['search-ingr-del']))) {echo "show-block";} else {echo "hide";} ?>" id="ingredients-block">
 
   <!-- Добавить ингредиент -->
 
-    <button class="btn-list2 add-ingredient" type="button" name="button">Добавить ингредиент</button>
 <form class="add-ingr-form" action="ingradd.php" method="post" enctype="multipart/form-data">
 <h3>Добавление ингредиента</h3>
   <?php if (isset($_SESSION['ingraddphoto'])) { ?>
@@ -194,8 +192,9 @@ function countPeople1($result) {
 
 <!--Изменить ингредиент-->
 
-<button class="btn-list2 update-ingredient" type="button" name="button">Изменить ингредиент</button>
-<form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
+<div class="ingr-up-search-block">
+<h3 class="title">Изменить ингредиент</h3>
+<form id="srresup" class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>#srresup">
   <input type="text" name="search-ingr-up" value="" placeholder="Введите название ингредиента">
   <input type="submit" name="submit-search-ingr-up" value="Найти">
 </form>
@@ -204,11 +203,12 @@ function countPeople1($result) {
 if(isset($inputSearch)) {
   countPeople($result); //Функция вывода ингредиентов
 } else {
-  echo "Здесь отображается список ингредиентов.";
+  echo "<div class='search-text'>Здесь отображается список ингредиентов.</div>";
 }
  ?>
 </div>
-<form class="up-ingr-form <?php if(isset($_GET['id'])) {echo "show";} else {echo "hide";} ?>" action="ingrup.php" method="post">
+</div>
+<form id="srup" class="up-ingr-form <?php if(isset($_GET['id'])) {echo "show";} else {echo "hide";} ?>" action="ingrup.php" method="post">
   <?php
   if(isset($_GET['id'])||isset($_SESSION['idIngredient'])) {
     if(isset($_GET['id']) && $_GET['id']!=NULL) {
@@ -228,27 +228,29 @@ if(isset($inputSearch)) {
 <label for="imgInp" class="input-file">
 <input accept="image/*" type="file" name="file" id="imgInp1" >
 </label>
-
+<div class="subtitle-img">
+  Внимание! Добавляйте изображение с соответствующим названием ингредиента. Например: Банан - banan.
+</div>
 <?php if (isset($_SESSION['upingrname'])) { ?>
 <div class="message-block"> <?php echo $_SESSION['upingrname']; unset($_SESSION['upingrname']); ?></div>
 <?php  }; ?>
-
-<p>Название ингредиента: </p>
+<label for="name">Название ингредиента (не более 45 знаков). Это поле не может быть пустым.</label>
 <input type="text" name="name" value="<?php if(isset($_GET['id'])) { echo $Ingredient['name'];} ?>">
 
 <?php if (isset($_SESSION['upingrdescription'])) { ?>
 <div class="message-block"> <?php echo $_SESSION['upingrdescription']; unset($_SESSION['upingrdescription']); ?></div>
 <?php  }; ?>
 
-<p>Описание ингредиента: </p>
+<label for="description">Описание ингредиента (не более 1000 знаков). Это поле не может быть пустым.</label>
 <textarea class="description-ingr" type="text" name="description" value=""><?php if(isset($_GET['id'])) {echo $Ingredient['description'];} ?></textarea>
 <input type="submit" name="submit-ingrup" value="Обновить">
 </form>
 
 <!-- Удаление ингредиента -->
 
-<button class="btn-list2 delete-ingredient" type="button" name="button">Удалить ингредиент</button>
-<form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
+<div class="ingr-del-search-block">
+  <h3 class="title">Удалить ингредиент</h3>
+<form id="srresdel" class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>#srresdel">
   <input type="text" name="search-ingr-del" value="" placeholder="Введите название ингредиента">
   <input type="submit" name="submit-search-ingr-del" value="Найти">
 </form>
@@ -257,11 +259,12 @@ if(isset($inputSearch)) {
 if(isset($inputSearch1)) {
   countPeople1($result); //Функция вывода ингредиентов
 } else {
-  echo "Здесь отображается список ингредиентов.";
+  echo "<div class='search-text'>Здесь отображается список ингредиентов.</div>";
 }
  ?>
 </div>
-  <form class="del-ingr-form <?php if(isset($_GET['idd'])) {echo "show";} else {echo "hide";} ?>" action="ingrdel.php" method="post" enctype="multipart/form-data">
+</div>
+  <form id="srdel" class="del-ingr-form <?php if(isset($_GET['idd'])) {echo "show";} else {echo "hide";} ?>" action="ingrdel.php" method="post" enctype="multipart/form-data">
     <?php
     if(isset($_GET['idd'])||isset($_SESSION['idIngredient'])) {
       if(isset($_GET['idd']) && $_GET['idd']!=NULL) {
@@ -329,6 +332,6 @@ if(isset($inputSearch1)) {
   };
   </script>'
   ?>
-  <script type="text/javascript" src="js/mode.js"></script>
+  <script type="text/javascript" src="js/moder.js"></script>
 </body>
 </html>

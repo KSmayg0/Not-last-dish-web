@@ -16,7 +16,7 @@ $description=$_POST['description'];
 if(strlen($name)>45 || empty($name)) {
   $_SESSION['upingrname']='Вы превысили допустимый предел по количеству символов. У вас ' . strlen($name) . ' символов.';
   $_SESSION['ingrup1']=false;
-  header("Location: update.php?id=". $_SESSION['idIngredient']);
+  header("Location: update.php?id=". $_SESSION['idIngredient']."#srup");
 } else {
   $_SESSION['ingrup1']=true;
   unset($_SESSION['upingrname']);
@@ -25,7 +25,7 @@ if(strlen($name)>45 || empty($name)) {
 if(strlen($description)>1000||empty($description)) {
   $_SESSION['upingrdescription']='Вы превысили допустимый предел по количеству символов. У вас ' . strlen($description) . ' символов.';
   $_SESSION['ingrup2']=false;
-  header("Location: update.php?id=".$_SESSION['idIngredient']);
+  header("Location: update.php?id=".$_SESSION['idIngredient']."#srup");
 } else {
   $_SESSION['ingrup2']=true;
   unset($_SESSION['upingrdescription']);

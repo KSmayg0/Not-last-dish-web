@@ -2,10 +2,14 @@ main {
   width:70%;
   margin-left:70px;
 }
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgba(0, 0, 0, 0.3);
+      letter-spacing: 0;
+}
 /*Добавление ингредиента*/
 .ingredients-block, .categories-block, .tag-block {
     transition:all 0.2s ease;
-
+display:none;
 }
 .img {
   display:flex;
@@ -22,21 +26,24 @@ main {
   height:250px;
 object-fit: cover;
 }
-input[name="title"] {
+input[name="title"],input[name="name"] {
   width: 300px;
   height: 30px;
 }
-label[for="title"],label[for="description"] {
+label[for="title"],label[for="description"],label[for='name'],p {
   margin: 5px 0px;
 }
-label[for='title'], input[name='title'], textarea[name='description'], label[for='description'] {
+label[for='title'], input[name='title'], textarea[name='description'], label[for='description'],label[for='name'],p {
   font-size:15px;
   font-weight:500;
 }
-input[name="title"], textarea[name="description"] {
+input[name="title"], textarea[name="description"],input[name="name"] {
+  font-size:15px;
+  font-weight:500;
+  color: #000;
   border: 2px solid #AAA;
   border-radius:10px;
-  padding: 10px;
+  padding: 15px;
 }
 input[name="submit-ingradd"],input[name="submit-ingrup"],input[name="submit-ingrdel"] {
   margin:10px 0px;
@@ -217,8 +224,71 @@ color: #000000;
 .hide {
   display:none;
 }
+.show-block {
+  display:block;
+}
 /*Удаление ингредиента*/
 
 .del-ingr-form input[type="text"], .del-ingr-form textarea {
   pointer-events:none;
+}
+/*Кастомизация поисков*/
+input[name="search-ingr-up"], input[name="search-ingr-del"] {
+  width: 330px;
+  height: 44px;
+  background: #FFFFFF;
+  border-radius: 20px 0px 0px 20px;
+  border: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000;
+  padding-left: 24px;
+}
+h3.title {
+  font-family: 'Nunito';
+  font-size:20px;
+  color:#000;
+  background: #FFF;
+  border:none;
+}
+.ingr-up-search-block,.ingr-del-search-block {
+  margin-top:20px;
+}
+.search-text {
+margin: 5px 0px 5px 10px;
+  font-size:15px;
+  font-weight:500;
+  color:#000;
+  font-family:'Roboto';
+}
+input[name="submit-search-ingr-up"], input[name="submit-search-ingr-del"]{
+  margin: 4px 0px 0px -3.5px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+border: none;
+color: #000000;
+width: 105px;
+height: 44px;
+background: #FFFFFF;
+border-left: 2px solid rgba(0, 0, 0, 0.3);
+border-radius: 0px 10px 10px 0px;
+transition: all 0.2s ease;
+}
+input[name="submit-search-ingr-up"]:hover {
+  background: #DDD;
+}
+input[name="submit-search-ingr-up"]:active {
+  background: #BBB;
+}
+input[name="submit-search-ingr-del"]:hover {
+  background: #DDD;
+}
+input[name="submit-search-ingr-del"]:active {
+  background: #BBB;
 }
