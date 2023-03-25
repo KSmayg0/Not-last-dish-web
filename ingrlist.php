@@ -5,8 +5,28 @@ $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
 
-$sql="SELECT * FROM `Ingredient`";
-$result=mysqli_query($connect,$sql);
+
+if(isset($_REQUEST['search'])&&($_REQUEST['search']!="")) {
+  $inputSearch=$_REQUEST['search'];
+  if($inputSearch!=NULL) {
+    if((strlen($inputSearch)/2)==1) {
+      $symbol1=mb_substr($inputSearch,0);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch' OR (`name` LIKE '{$symbol1}%') ORDER BY `name` ASC";
+        $result=mysqli_query($connect,$sql);
+    } else {
+      $symbol3=mb_substr($inputSearch,0,3);
+        $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch' OR (`name` LIKE '%{$symbol3}%')";
+        $result=mysqli_query($connect,$sql);
+    }
+
+  } else {
+    $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch'";
+    $result=mysqli_query($connect,$sql);
+  }
+} else if($_REQUEST['search']=="") {
+  $sql="SELECT * FROM `Ingredient`";
+  $result=mysqli_query($connect,$sql);
+}
 
 function doesItExist(array $arr) {
   //Создаём новый массив
@@ -36,6 +56,8 @@ function countPeople($result) {
     if($kol % 3 !=0) {
       echo "</div>";
     }
+  } else {
+    echo "<div class='search-text'>По такому запросу ингредиенты в базе данных не найдены.</div>";
   }
 }
  ?>
@@ -58,8 +80,10 @@ function countPeople($result) {
   <header>
     <div class="logo"> <a class="logo-text" href="../main/main.php">Not last dish</a> </div>
     <div class="search-block">
-      <input type="text" name="search" placeholder="Поиск ингредиентов">
-      <button type="button" name="button" class="button-search">Найти</button>
+      <form class="" action="<?= $_SERVER['SCRIPT_NAME'] ?>">
+        <input type="text" name="search" value="" placeholder="Поиск ингредиентов">
+        <input type="submit" name="button" class="button-search" value="Найти">
+      </form>
     </div>
     <?php
   if($user['idRole']=='Модератор') {

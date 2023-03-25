@@ -53,3 +53,7 @@ color: #000000;
 .ingredient-block:not(:first-child) {
   margin-left:20px;
 }
+.search-text {
+  font-size:15px;
+  font-weight:500;
+}
