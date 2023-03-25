@@ -1,0 +1,13 @@
+main{
+  width:70%;
+  margin-left:70px;
+}
+.main-form {
+  background: #FFF;
+  padding:30px;
+  border-radius: 20px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

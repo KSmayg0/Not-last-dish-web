@@ -23,7 +23,10 @@ if(isset($_REQUEST['search'])&&($_REQUEST['search']!="")) {
     $sql="SELECT * FROM `Ingredient` WHERE `name`='$inputSearch'";
     $result=mysqli_query($connect,$sql);
   }
-} else if($_REQUEST['search']=="") {
+} else if(isset($_REQUEST['search'])&&($_REQUEST['search']=="")) {
+  $sql="SELECT * FROM `Ingredient`";
+  $result=mysqli_query($connect,$sql);
+} else {
   $sql="SELECT * FROM `Ingredient`";
   $result=mysqli_query($connect,$sql);
 }
@@ -57,7 +60,29 @@ function countPeople($result) {
       echo "</div>";
     }
   } else {
+
     echo "<div class='search-text'>По такому запросу ингредиенты в базе данных не найдены.</div>";
+    $connect = mysqli_connect('localhost','root','','Recipes');
+    $sql="SELECT * FROM `Ingredient`";
+    $result=mysqli_query($connect,$sql);
+    while($row=$result->fetch_assoc()) {
+      $arr=doesItExist($row);
+      //Вывод данных
+      if($kol % 3==0) {
+        echo "<div class='ingredient-list'>";
+      }
+      echo "<div class='ingredient-block'><img class='ingr-search-picture' src='ingredients/".$row['picture']."' >
+     <div class='ingredient-name'>".$row['name']."</div>
+       <div class='ingredient-description'>".$row['description']."</div></div>";
+       if($kol % 3==2) {
+         echo "</div>";
+       }
+       $kol++;
+    }
+    if($kol % 3 !=0) {
+      echo "</div>";
+    }
+
   }
 }
  ?>
@@ -96,7 +121,7 @@ function countPeople($result) {
   <ul class="menu">
     <li class="profile"><a href="../profile/profile.php"><img src="../css/Profile_icon.png" alt=""><div>Профиль</div></a></li>
     <li class="favorites"><a href="#"><img src="../css/Favorites_icon.png" alt=""><div>Избранное</div></a></li>
-    <li class="create"><a href="#"><img src="../css/Create_icon.png" alt=""><div>Создать рецепт</div></a></li>
+      <li class="create"><a href="createrecipe.php"><img src="../css/Create_icon.png" alt=""><div>Создать рецепт</div></a></li>
     <li class="settings"><a href="#"><img src="../css/Settings_icon.png" alt=""><div>Настройки</div></a></li>
     <li class="tech_support"><a href="#"><div class="img-other"><img src="../css/Tech_icon.png" alt=""></div><div>Техническая поддержка</div></a></li>
     <li class="ingredients"><a href="ingrlist.php"><div class="img-other"><img src="../css/Ingredients_icon.png" alt=""></div><div>Список ингредиентов</div></a></li>
