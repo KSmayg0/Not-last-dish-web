@@ -4,6 +4,14 @@ include("../config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
+
+if(isset($_POST['submit'])) {
+  $file='D:/OpenServer/OSPanel/domains/Recipes/imgavatar/'.$user['avatar'];
+  unlink($file);
+  $sql="UPDATE `User` SET `avatar` = NULL WHERE `idUser`={$user['idUser']}";
+  $result= mysqli_query($connect, $sql);
+  header('Location: profile.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +92,14 @@ $user=mysqli_fetch_assoc($result);
     <img class="user-avatar" src="../imgavatar/<?= $user['avatar']; ?>" alt="">
     <?php
     } ?>
+    <?php if($user['avatar']!=NULL) {
+      ?>
+      <form class="" action="profile.php" method="post">
+        <input type="submit" name="submit" value="" />
+      </form>
+      <?php
+    }
+    ?>
   </div>
   </div>
 <div class="email-block">
