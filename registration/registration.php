@@ -27,9 +27,6 @@ include("../config/connect.php");
         </div>
   <form name="form" action="../registr.php" method="post" enctype="multipart/form-data">
     <div class="backgr">
-      <?php if (isset($_SESSION['notok'])) { ?>
-  <div class="message-block"> <?php echo $_SESSION['notok']; unset($_SESSION['notok']); ?></div>
-    <?php  }; ?>
     <div class="img">
       <img id="blanh" src="../css/ava_default.png">
     </div>
@@ -77,9 +74,16 @@ include("../config/connect.php");
         <?php if(isset($_SESSION['confirm'])) { ?>
 <div class="message-block"> <?php echo $_SESSION['confirm']; unset($_SESSION['confirm']); ?></div>
         <?php }; ?>
+
+        <?php if (isset($_SESSION['terms'])) { ?>
+    <div class="message-block"> <?php echo $_SESSION['terms']; unset($_SESSION['terms']); ?></div>
+      <?php  }; ?>
         <div class="checkbox checkbox-first">
           <input type="checkbox" name="terms"><span>Я принимаю</span><a class="links" href="#">Пользовательское соглашение</a>
         </div>
+        <?php if (isset($_SESSION['privacy'])) { ?>
+    <div class="message-block"> <?php echo $_SESSION['privacy']; unset($_SESSION['privacy']); ?></div>
+      <?php  }; ?>
         <div class="checkbox checkbox-second">
           <input type="checkbox" name="privacy"><span>Я принимаю</span><a class="links" href="#">Политику конфиденциальности</a>
         </div>

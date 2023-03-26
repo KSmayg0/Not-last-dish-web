@@ -140,16 +140,27 @@ else {
   $_SESSION['logpas']=true;
   unset($_SESSION['logpas']);
 }*/
+//Проверка галочки на пользовательском соглашении
+if($_POST['terms']) {
+  unset($_SESSION['terms']);
+} else {
+  $_SESSION['terms']="Это обязательное поле.";
+  header("Location: registration/registration.php");
+}
+if($_POST['privacy']) {
+  unset($_SESSION['privacy']);
+} else {
+  $_SESSION['privacy']="Это обязательное поле.";
+  header("Location: registration/registration.php");
+}
 
 if($_SESSION['1']==true && $_SESSION['2']==true && $_SESSION['3']==true && $_SESSION['4']==true && $_SESSION['5']==true && $_SESSION['6'] ==true && $_POST['terms'] && $_POST['privacy']) {
 $sql="INSERT INTO `User` (`name`, `surname`, `nickname`,`avatar`, `login`, `password`, `idRole`, `email`) VALUES
   ( '$name', '$surname', '$nickname','$filename', '$login', '$password', 'Пользователь', '$mail' )";
   mysqli_query($connect, $sql);//посылает запрос на сервер
-unset($_SESSION['notok']);
   $_SESSION['ok']='Регистрация прошла успешно';
   header("Location: index.php");
 } else {
-  $_SESSION['notok']='Что-то пошло не так';
   unset($_SESSION['ok']);
     header("Location: registration/registration.php");
 }
