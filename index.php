@@ -41,7 +41,9 @@ if(isset($_GET['error'])) {
         <input type="text" id="login" name="login" placeholder="Логин">
         <input type="password" id="password" name="password" placeholder="Пароль">
         <div class="forget-pass-block"><a class="forget-pass" href="#">Забыли пароль?</a></div>
-        <div class="checkbox-block"> <input type="checkbox" name="remember" value=""> <span>Запомнить меня</span>  </div>
+        <div class="checkbox-block"><label class="checkbox">
+          <input type="checkbox"><span class="fake"></span> <span class="text">Запомнить меня</span>
+          </label></div>
         <div class="button-submit"><input type="submit" id="btn" value="Войти" name="submit" /></div>
   </form>
   </div>

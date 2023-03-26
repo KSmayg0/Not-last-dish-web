@@ -79,13 +79,17 @@ include("../config/connect.php");
     <div class="message-block"> <?php echo $_SESSION['terms']; unset($_SESSION['terms']); ?></div>
       <?php  }; ?>
         <div class="checkbox checkbox-first">
-          <input type="checkbox" name="terms"><span>Я принимаю</span><a class="links" href="#">Пользовательское соглашение</a>
+          <label class="checkbox">
+          <input type="checkbox" name="terms"> <span class="fake"></span> <span>Я принимаю</span><a class="links" href="#">Пользовательское соглашение</a>
+          </label>
         </div>
         <?php if (isset($_SESSION['privacy'])) { ?>
     <div class="message-block"> <?php echo $_SESSION['privacy']; unset($_SESSION['privacy']); ?></div>
       <?php  }; ?>
         <div class="checkbox checkbox-second">
-          <input type="checkbox" name="privacy"><span>Я принимаю</span><a class="links" href="#">Политику конфиденциальности</a>
+          <label class="checkbox">
+          <input type="checkbox" name="privacy"> <span class="fake"></span> <span>Я принимаю</span><a class="links" href="#">Политику конфиденциальности</a>
+          </label>
         </div>
             </div>
             <div class="imgbotblock">
