@@ -10,6 +10,7 @@ $user=mysqli_fetch_assoc($result);
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-http-equiv="Cache-Control" content="no-cache" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/header.css">
@@ -51,7 +52,7 @@ $user=mysqli_fetch_assoc($result);
   </aside>
   <main>
     <h1>Добавить рецепт</h1>
-    <form class="main-form" action="addrecipe.php" method="post">
+    <form class="main-form" action="" method="post">
       <!-- Основная информация рецепта -->
       Фотографии блюда. Должна быть хотя бы одна фотография.
       <input type="file" name="pictures" value="">
@@ -86,9 +87,9 @@ echo "</select>";
 <!-- Добавление ингредиента -->
 <h3>Список ингредиентов</h3>
     <div class="ingredient-list">
-      <button id='add' onclick="addIngr()">Добавить</button>
-      <button id="del" onclick="removeIngr()">Удалить</button>
-      <div class="" id="element-list">
+      <button id='add-in' onclick="addIngr()">Добавить</button>
+      <button id="del-in" onclick="removeIngr()">Удалить</button>
+      <div class="element-list" id="element-list">
 
       </div>
     </div>
@@ -106,15 +107,36 @@ echo "</select>";
 </div>
 </body>
 <script type="text/javascript">
-var count=1;
-function addIngr() {
+//sessionStorage.clear();
   var elementlist = document.getElementById('element-list');
-  var  element = document.createElement('div');
-  element.setAttribute('id','element');
-  element.innerHTML = `
-            <label>Item ${count}</label>
-            <input />`;
-  elementlist.appendChild(element);
+  var count;
+
+  /*Выводим массив session*/
+  for(let i=1; i<sessionStorage.length+1; i++) {
+//let key = sessionStorage.key(i);
+  let el=document.createElement('div');
+  el.innerHTML=sessionStorage.getItem(i);
+  elementlist.appendChild(el);
+  console.log(`${i}: ${sessionStorage.getItem(i)}`);
+}
+
+
+
+if(sessionStorage.length>1) {
+count=sessionStorage.length;
+console.log('Выполнилось 1');
+}
+else {
+  console.log('Выполнилось 2');
+  count=0;
+}
+console.log('count = '+count);
+function addIngr() {
+    count++;
+let elem = document.createElement('div');
+elem.setAttribute('class','element');
+elem.innerHTML="Элемент "+count;
+elementlist.appendChild(elem);
   //Чтобы форма не отправлялась
 const of=document.querySelector('form')
 of.addEventListener('click', e => {
@@ -123,10 +145,10 @@ of.addEventListener('click', e => {
   if(o.tagName!= 'BUTTON') return
   e.preventDefault()
 })
-count++;
-}
+sessionStorage.setItem(count,"Элемент "+count);
+};
+
 function removeIngr() {
-    var elementlist = document.getElementById('element-list');
     elementlist.removeChild(elementlist.lastChild);
   const of=document.querySelector('form')
   of.addEventListener('click', e => {
@@ -135,7 +157,8 @@ function removeIngr() {
     e.preventDefault()
     //o.closest('#element-list').removeChild(o.closest('#element'))
   })
-  count--;
+  sessionStorage.removeItem(count);
+    count--;
 }
 var count1=1;
 function addDes() {
