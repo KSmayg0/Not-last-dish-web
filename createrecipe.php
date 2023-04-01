@@ -138,15 +138,11 @@ else {
   count=0;
 }
 
-if(localStorage.length>1) {
+if(localStorage.length>=1) {
 count1=localStorage.length;
-console.log(localStorage.length);
-console.log('Выполнилось это '+count1);
 }
 else {
-  count1=1;
-  console.log(localStorage.length);
-    console.log('Выполнилось второе '+count1);
+  count1=0;
 }
 
 function addIngr() {
@@ -180,7 +176,7 @@ function removeIngr() {
 }
 
 function addDes() {
-  console.log('Сейчас count1= '+count1);
+count1++;
 let elem = document.createElement('div');
 elem.setAttribute('class','desc_element');
 elem.innerHTML="Шаг "+count1;
@@ -194,8 +190,6 @@ if(o.tagName!= 'BUTTON') return
 e.preventDefault()
 })
 localStorage.setItem(count1,"Шаг "+count1);
-  count1++;
-console.log('Сейчас count1= '+count1);
 }
 
 function removeDes() {
