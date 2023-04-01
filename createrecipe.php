@@ -108,31 +108,49 @@ echo "</select>";
 </body>
 <script type="text/javascript">
 //sessionStorage.clear();
+//localStorage.clear();
   var elementlist = document.getElementById('element-list');
   var count;
-
+  var desclist=document.getElementById('desc-list');
+  var count1;
   /*Выводим массив session*/
   for(let i=1; i<sessionStorage.length+1; i++) {
 //let key = sessionStorage.key(i);
   let el=document.createElement('div');
   el.innerHTML=sessionStorage.getItem(i);
   elementlist.appendChild(el);
-  console.log(`${i}: ${sessionStorage.getItem(i)}`);
+ console.log(`${i}: ${sessionStorage.getItem(i)}`);
 }
 
+/*Выводим массив local*/
+for(let i=1; i<localStorage.length+1; i++) {
+//let key = sessionStorage.key(i);
+let el=document.createElement('div');
+el.innerHTML=localStorage.getItem(i);
+desclist.appendChild(el);
+//console.log(`${i}: ${localStorage.getItem(i)}`);
+}
 
-
-if(sessionStorage.length>1) {
+if(sessionStorage.length>=1) {
 count=sessionStorage.length;
-console.log('Выполнилось 1');
 }
 else {
-  console.log('Выполнилось 2');
   count=0;
 }
-console.log('count = '+count);
+
+if(localStorage.length>1) {
+count1=localStorage.length;
+console.log(localStorage.length);
+console.log('Выполнилось это '+count1);
+}
+else {
+  count1=1;
+  console.log(localStorage.length);
+    console.log('Выполнилось второе '+count1);
+}
+
 function addIngr() {
-    count++;
+count++;
 let elem = document.createElement('div');
 elem.setAttribute('class','element');
 elem.innerHTML="Элемент "+count;
@@ -160,35 +178,36 @@ function removeIngr() {
   sessionStorage.removeItem(count);
     count--;
 }
-var count1=1;
+
 function addDes() {
-  var elementlist = document.getElementById('desc-list');
-  var  element = document.createElement('div');
-  element.setAttribute('id','step');
-  element.innerHTML = `
-            <label>Шаг ${count1}</label>
-            <input />`;
-  elementlist.appendChild(element);
-  //Чтобы форма не отправлялась
+  console.log('Сейчас count1= '+count1);
+let elem = document.createElement('div');
+elem.setAttribute('class','desc_element');
+elem.innerHTML="Шаг "+count1;
+desclist.appendChild(elem);
+//Чтобы форма не отправлялась
 const of=document.querySelector('form')
 of.addEventListener('click', e => {
 //  elementlist.appendChild(element);
+const o=e.target;
+if(o.tagName!= 'BUTTON') return
+e.preventDefault()
+})
+localStorage.setItem(count1,"Шаг "+count1);
+  count1++;
+console.log('Сейчас count1= '+count1);
+}
+
+function removeDes() {
+  desclist.removeChild(desclist.lastChild);
+const of=document.querySelector('form')
+of.addEventListener('click', e => {
   const o=e.target;
   if(o.tagName!= 'BUTTON') return
   e.preventDefault()
+  //o.closest('#element-list').removeChild(o.closest('#element'))
 })
-count1++;
-}
-function removeDes() {
-    var elementlist = document.getElementById('desc-list');
-    elementlist.removeChild(elementlist.lastChild);
-  const of=document.querySelector('form')
-  of.addEventListener('click', e => {
-    const o=e.target;
-    if(o.tagName!= 'BUTTON') return
-    e.preventDefault()
-    //o.closest('#element-list').removeChild(o.closest('#element'))
-  })
+localStorage.removeItem(count1);
   count1--;
 }
 </script>
