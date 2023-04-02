@@ -149,7 +149,7 @@ function addIngr() {
 count++;
 let elem = document.createElement('div');
 elem.setAttribute('class','element');
-elem.innerHTML="Ингредиент "+count + ": <input type='number' name='' value='' placeholder='Количество'>"+select;
+elem.innerHTML="Ингредиент "+ count + ": <input type='number' name='' value='' placeholder='Количество'>"+ select;
 elementlist.appendChild(elem);
   //Чтобы форма не отправлялась
 const of=document.querySelector('form')
@@ -159,7 +159,7 @@ of.addEventListener('click', e => {
   if(o.tagName!= 'BUTTON') return
   e.preventDefault()
 })
-sessionStorage.setItem(count,"Ингредиент "+count + ": <input type='number' name='' value='' placeholder='Количество'>"+select);
+sessionStorage.setItem(count,"Ингредиент "+ count + ": <input type='number' name='ingredients[" + count + "]' value='' placeholder='Количество'>"+ select);
 };
 
 function removeIngr() {
@@ -179,7 +179,7 @@ function addDes() {
 count1++;
 let elem = document.createElement('div');
 elem.setAttribute('class','desc_element');
-elem.innerHTML="Шаг "+count1;
+elem.innerHTML="Шаг "+ count1 + " :   <input type='file' name='photostep["+ count1 +"]' value=''><textarea name='description["+ count1 +"]'></textarea>";
 desclist.appendChild(elem);
 //Чтобы форма не отправлялась
 const of=document.querySelector('form')
@@ -189,7 +189,7 @@ const o=e.target;
 if(o.tagName!= 'BUTTON') return
 e.preventDefault()
 })
-localStorage.setItem(count1,"Шаг "+count1);
+localStorage.setItem(count1,"Шаг "+ count1 + " :   <input type='file' name='photostep["+ count1 +"]' value=''><textarea name='description["+ count1 +"]'></textarea>");
 }
 
 function removeDes() {
