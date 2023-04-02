@@ -4,6 +4,15 @@ include ("config/connect.php");
 $sql="SELECT * FROM `User` WHERE `idUser`='{$_SESSION['idUser']}'";
 $result= mysqli_query($connect, $sql);
 $user=mysqli_fetch_assoc($result);
+
+$sql="SELECT * FROM `Unit`";
+$result=mysqli_query($connect,$sql);
+$select="<select name=''><option value=''></option>";
+while($unit=mysqli_fetch_assoc($result)) {
+  $select=$select."<option value='{$unit['name']}'>{$unit['name']}</option>";
+}
+$select=$select."</select>";
+
  ?>
 
 <!DOCTYPE html>
@@ -70,16 +79,6 @@ $user=mysqli_fetch_assoc($result);
   <option value="сут">сут</option>
 </select>
 
-<input type="number" name="" value="" placeholder="Количество">
-<?php
-$sql="SELECT * FROM `Unit`";
-$result=mysqli_query($connect,$sql);
-echo "<select name=''><option value=''></option>";
-while($unit=mysqli_fetch_assoc($result)) {
-  echo "<option value='{$unit['name']}'>{$unit['name']}</option>";
-}
-echo "</select>";
-?>
 <label for="portion">Введите количество порций</label>
 <input type="number" name="portion" value="" placeholder="Количество">
 <label for="calorific">Введите количество каллорий на одну порцию. Это поле вы можете оставить пустым.</label>
@@ -113,6 +112,7 @@ echo "</select>";
   var count;
   var desclist=document.getElementById('desc-list');
   var count1;
+  var select=<?php echo json_encode($select); ?>
   /*Выводим массив session*/
   for(let i=1; i<sessionStorage.length+1; i++) {
 //let key = sessionStorage.key(i);
@@ -149,7 +149,7 @@ function addIngr() {
 count++;
 let elem = document.createElement('div');
 elem.setAttribute('class','element');
-elem.innerHTML="Элемент "+count;
+elem.innerHTML="Ингредиент "+count + ": <input type='number' name='' value='' placeholder='Количество'>"+select;
 elementlist.appendChild(elem);
   //Чтобы форма не отправлялась
 const of=document.querySelector('form')
@@ -159,7 +159,7 @@ of.addEventListener('click', e => {
   if(o.tagName!= 'BUTTON') return
   e.preventDefault()
 })
-sessionStorage.setItem(count,"Элемент "+count);
+sessionStorage.setItem(count,"Ингредиент "+count + ": <input type='number' name='' value='' placeholder='Количество'>"+select);
 };
 
 function removeIngr() {
